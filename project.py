@@ -1,35 +1,54 @@
-available_pizzas = ["papperoni", "Cheese", "hawaian", "veggie"]
+"""
+PROJECT SCHOOL GRADES
+"""
+def cari_minimum(daftar_nilai):
+    minimum = daftar_nilai[0]
 
-pizza_order = []
-total_harga = 0 
+    for nilai in daftar_nilai:
+        if nilai < minimum:
+            minimum = nilai
 
-lanjut_pesan = 'ya' 
+        return minimum
 
-while lanjut_pesan.lower() == 'ya':
+def cari_maksimum(daftar_nilai):
+    maksimum = daftar_nilai[0]
 
-    print("/nDaftar Pizza:")
-    for i, pizza in enumerate(available_pizzas, start=1):
-        print(i, ".", pizza)
+    for nilai in daftar_nilai:
+        if nilai > maksimum:
+            maksimum = nilai
 
-    pilihan = int(input("pilih nomor pizza:"))
+    return maksimum
 
-    if 1 <= pilihan <= len(available_pizzas):
-        pizza_order.append(available_pizzas[pilihan - 1])
-        total_harga += 10
-        print("pizza ditambahkan ke pesanan Anda.")
+def hitung_rata_rata(daftar_nilai):
+    total = 0
+
+    for nilai in daftar_nilai:
+        total += nilai
+
+    return total / len(daftar_nilai)
+
+nilai = []
+
+while True:
+    data = float(input("masukkkan nilai (1-10), ketik -1 untuk selesai:"))
+
+    if data == -1:
+        break
+
+    if 0 <= data <= 10:
+        nilai.append(data)
     else:
-        print("nomor pizza tidak valid. ")
+        print("nilai harus antara 0 sampai 10")
 
-    lanjut_pesan = input("apakah anda ingin tambah pizza lagi? (ya/tidak): ")
+if len(nilai) == 0:
+    print("tidak ada nilai yang dimasukkan")
+else:
+    minimum = cari_minimum(nilai)
+    maksimum = cari_maksimum(nilai)
+    rata_rata = hitung_rata_rata(nilai)
 
-tip = int(input("Masukkan tip untuk pengiriman (0-25%): "))
-
-while tip < 0 or tip > 25:
-    tip = int(input("tip harus antara 0 dan 25%. Masukkan tip untuk pengiriman (0-25%): "))
-
-total_harga += total_harga * (tip / 100)
-
-print("/n====STRUK PESANAN PIZZA====")
-print("pesanan:", pizza_order)
-print("total pembayaran: ", total_harga)
-print("pesanan sedang diproses. Terima kasih!")
+    print("\n ==== HASIL ===")
+    print("jumlah nilai: ", len(nilai))
+    print("nilai minimum: ", minimum)
+    print("nilai maksimum: ", maksimum)
+    print("nilai rata-rata:", round(rata_rata, 2))
